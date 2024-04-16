@@ -562,7 +562,6 @@ public class Minecraft implements IThreadListener, IPlayerUsage
         this.effectRenderer = new EffectRenderer(this.theWorld, this.renderEngine);
         this.checkGLError("Post startup");
         this.ingameGUI = new GuiIngame(this);
-        Client.INSTANCE.init();
 
         if (this.serverName != null)
         {
@@ -591,6 +590,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
             this.gameSettings.enableVsync = false;
             this.gameSettings.saveOptions();
         }
+        Client.INSTANCE.init();
 
         this.renderGlobal.makeEntityOutlineShader();
     }
@@ -1032,7 +1032,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
     {
         try
         {
-            Client.INSTANCE.init();
+            Client.INSTANCE.shutdown();
             this.stream.shutdownStream();
             logger.info("Stopping!");
 

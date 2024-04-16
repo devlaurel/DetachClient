@@ -1,4 +1,4 @@
-package dev.laurel.module.impl;
+package dev.laurel.module.impl.motion;
 
 import dev.codeman.eventbus.EventHandler;
 import dev.codeman.eventbus.Listener;

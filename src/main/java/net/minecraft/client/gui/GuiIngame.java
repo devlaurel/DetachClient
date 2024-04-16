@@ -6,6 +6,10 @@ import com.google.common.collect.Lists;
 import java.util.Collection;
 import java.util.List;
 import java.util.Random;
+
+import dev.laurel.client.Client;
+import dev.laurel.event.EventRender2D;
+import lombok.SneakyThrows;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -344,6 +348,8 @@ public class GuiIngame extends Gui
         {
             this.overlayPlayerList.updatePlayerList(false);
         }
+        EventRender2D eventRender2D = new EventRender2D(scaledresolution, partialTicks);
+        Client.INSTANCE.getEventBus().publish(eventRender2D);
 
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         GlStateManager.disableLighting();

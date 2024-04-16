@@ -1,6 +1,7 @@
 package dev.laurel.module;
 
-import dev.laurel.module.impl.SprintModule;
+import dev.laurel.module.impl.motion.SprintModule;
+import dev.laurel.module.impl.visual.HUDModule;
 import lombok.Getter;
 import lombok.SneakyThrows;
 
@@ -14,6 +15,7 @@ public final class ModuleManager {
     public ModuleManager() {
         this.modules = new HashMap<>();
         this.addModule(SprintModule.class);
+        this.addModule(HUDModule.class);
     }
 
     @SneakyThrows
