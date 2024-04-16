@@ -1,6 +1,7 @@
 package dev.laurel.client.clickgui.panel;
 
 import dev.laurel.client.Client;
+import dev.laurel.client.clickgui.panel.component.Component;
 import dev.laurel.module.Module;
 import dev.laurel.module.ModuleCategory;
 import dev.laurel.module.impl.motion.SprintModule;
@@ -11,6 +12,8 @@ import net.minecraft.client.renderer.GlStateManager;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public final class PanelClickGUI extends GuiScreen {
     public static final PanelClickGUI INSTANCE = new PanelClickGUI();
@@ -22,22 +25,29 @@ public final class PanelClickGUI extends GuiScreen {
     private int guiWidth = 360;
     private int guiHeight = 280;
 
-    private int lineX = 100;
+    private int lineX = guiX + 40;
+
+    private boolean dragging = false;
+    private int dragX;
+    private int dragY;
 
     private ModuleCategory selectedModuleCategory;
     private Module selectedModule;
 
+    private final List<Component> components;
+
     private boolean isSelectedModuleCategory(ModuleCategory moduleCategory) {
-        return selectedModuleCategory == moduleCategory;
+        return this.selectedModuleCategory == moduleCategory;
     }
 
     private boolean isSelectedModule(Module module) {
-        return selectedModule == module;
+        return this.selectedModule == module;
     }
 
     public PanelClickGUI() {
         this.selectedModuleCategory = ModuleCategory.values()[0];
         this.selectedModule = Client.INSTANCE.getModuleManager().getModule(SprintModule.class);
+        this.components = new ArrayList<>();
     }
 
     @Override
@@ -59,7 +69,7 @@ public final class PanelClickGUI extends GuiScreen {
 
         int count = 0;
         for (Module module : Client.INSTANCE.getModuleManager().getModulesInCategory(this.selectedModuleCategory)) {
-            mc.fontRendererObj.drawStringWithShadow(this.isSelectedModule(module) ? "> " + module.getName() : module.getName(), this.guiX + 2, this.guiY + 2 + count * (mc.fontRendererObj.FONT_HEIGHT + 2), this.isSelectedModule(module) ? new Color(2, 102, 178).getRGB() : Color.lightGray.getRGB());
+            mc.fontRendererObj.drawStringWithShadow(module.getName(), this.guiX + 2, this.guiY + 2 + count * (mc.fontRendererObj.FONT_HEIGHT + 2), this.isSelectedModule(module) ? new Color(2, 102, 178).getRGB() : Color.lightGray.getRGB());
             count++;
         }
 
@@ -70,6 +80,10 @@ public final class PanelClickGUI extends GuiScreen {
         }
 
         GlStateManager.popMatrix();
+
+        for (Component component : this.components) {
+            component.drawScreen(mouseX, mouseY, partialTicks);
+        }
     }
 
     @Override
@@ -79,7 +93,7 @@ public final class PanelClickGUI extends GuiScreen {
         if (mouseButton == 0) {
             int count = 0;
             for (Module module : Client.INSTANCE.getModuleManager().getModulesInCategory(this.selectedModuleCategory)) {
-                if (MouseUtil.isRectHovered(mouseX, mouseY, (int) ((this.guiX + 2) * this.scale), (int) ((this.guiY + 2 + count * (mc.fontRendererObj.FONT_HEIGHT + 2)) * this.scale), (int) ((lineX) * this.scale), (int) ((count * (mc.fontRendererObj.FONT_HEIGHT + 2) + mc.fontRendererObj.FONT_HEIGHT + 2) * this.scale))) {
+                if (MouseUtil.isRectHovered(mouseX, mouseY, (int) ((this.guiX + 2) * this.scale), (int) ((this.guiY + 2 + count * (mc.fontRendererObj.FONT_HEIGHT + 2)) * this.scale), (int) ((this.lineX) * this.scale), (int) ((count * (mc.fontRendererObj.FONT_HEIGHT + 2) + mc.fontRendererObj.FONT_HEIGHT + 2) * this.scale))) {
                     this.selectedModule = module;
                 }
                 count++;
@@ -93,10 +107,18 @@ public final class PanelClickGUI extends GuiScreen {
                 count1 += mc.fontRendererObj.getStringWidth(moduleCategory.getName()) + 8;
             }
         }
+
+        for (Component component : this.components) {
+            component.mouseClicked(mouseX, mouseY, mouseButton);
+        }
     }
 
     @Override
     protected void mouseReleased(int mouseX, int mouseY, int state) {
         super.mouseReleased(mouseX, mouseY, state);
+
+        for (Component component : this.components) {
+            component.mouseReleased(mouseX, mouseY, state);
+        }
     }
 }

@@ -18,6 +18,8 @@ public final class KeyHandler {
             if (key == module.getKey()) module.toggle();
         }
 
-        if (key == Keyboard.KEY_RSHIFT) mc.displayGuiScreen(PanelClickGUI.INSTANCE);
+        if (key == Keyboard.KEY_RSHIFT) {
+            mc.displayGuiScreen(PanelClickGUI.INSTANCE);
+        }
     };
 }

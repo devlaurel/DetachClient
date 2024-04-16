@@ -1,8 +1,13 @@
 package dev.laurel.module;
 
 import dev.laurel.client.Client;
+import dev.laurel.client.setting.Setting;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Getter
 public abstract class Module {
@@ -23,11 +28,18 @@ public abstract class Module {
         this.setEnabled(!this.enabled);
     }
 
+    private final List<Setting> settings;
+
+    protected void addSettings(Setting... settings) {
+        this.settings.addAll(Arrays.asList(settings));
+    }
+
     public Module() {
         ModuleInfo moduleInfo = this.getClass().getAnnotation(ModuleInfo.class);
         this.name = moduleInfo.name();
         this.description = moduleInfo.description();
         this.moduleCategory = moduleInfo.moduleCategory();
+        this.settings = new ArrayList<>();
     }
 
     protected void onEnable() {
