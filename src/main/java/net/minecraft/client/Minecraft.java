@@ -35,6 +35,9 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
 import javax.imageio.ImageIO;
+
+import dev.laurel.client.Client;
+import dev.laurel.event.EventKey;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.audio.MusicTicker;
@@ -559,6 +562,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
         this.effectRenderer = new EffectRenderer(this.theWorld, this.renderEngine);
         this.checkGLError("Post startup");
         this.ingameGUI = new GuiIngame(this);
+        Client.INSTANCE.init();
 
         if (this.serverName != null)
         {
@@ -1028,6 +1032,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
     {
         try
         {
+            Client.INSTANCE.init();
             this.stream.shutdownStream();
             logger.info("Stopping!");
 
@@ -1918,6 +1923,8 @@ public class Minecraft implements IThreadListener, IPlayerUsage
                     }
                     else
                     {
+                        EventKey eventKey = new EventKey(k);
+                        Client.INSTANCE.getEventBus().publish(eventKey);
                         if (k == 1)
                         {
                             this.displayInGameMenu();
