@@ -7,7 +7,7 @@ import net.minecraft.client.gui.ScaledResolution;
 
 @Getter
 @AllArgsConstructor
-public class EventRender2D extends Event {
+public final class EventRender2D extends Event {
     private final ScaledResolution scaledResolution;
     private final float partialTicks;
 }

@@ -6,7 +6,9 @@ import lombok.Getter;
 import lombok.SneakyThrows;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Getter
 public final class ModuleManager {
@@ -16,6 +18,10 @@ public final class ModuleManager {
         this.modules = new HashMap<>();
         this.addModule(SprintModule.class);
         this.addModule(HUDModule.class);
+    }
+
+    public List<Module> getModulesInCategory(ModuleCategory moduleCategory) {
+        return this.modules.values().stream().filter(module -> module.getModuleCategory() == moduleCategory).collect(Collectors.toList());
     }
 
     @SneakyThrows

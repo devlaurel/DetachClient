@@ -23,7 +23,7 @@ public final class Client {
         this.moduleManager = new ModuleManager();
         this.keyHandler = new KeyHandler();
 
-        this.eventBus.subscribe(KeyHandler.class);
+        this.eventBus.subscribe(keyHandler);
     }
 
     public void shutdown() {

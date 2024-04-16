@@ -18,7 +18,7 @@ import java.util.Comparator;
 import static dev.laurel.client.IMinecraft.mc;
 
 @ModuleInfo(name = "HUD", description = "Displays the client's HUD", moduleCategory = ModuleCategory.VISUAL)
-public class HUDModule extends Module {
+public final class HUDModule extends Module {
 
     public HUDModule() {
         this.setEnabled(true);
