@@ -9,8 +9,9 @@ import java.util.List;
 
 @Setter
 @Getter
-public class ModeSetting extends Setting {
+public final class ModeSetting extends Setting {
     private final List<String> modes;
+
     private int modeIndex;
     private String currentMode;
 

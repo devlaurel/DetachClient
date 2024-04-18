@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class BooleanSetting extends Setting {
+public final class BooleanSetting extends Setting {
     private boolean enabled;
 
     public BooleanSetting(String name, boolean defaultState) {

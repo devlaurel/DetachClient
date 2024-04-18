@@ -10,6 +10,7 @@ import lombok.Getter;
 public abstract class Component {
     private final Module module;
     private final Setting setting;
+    private final int offset;
 
     public abstract void drawScreen(int mouseX, int mouseY, float partialTicks);
 

@@ -14,12 +14,12 @@ import lombok.Getter;
 import static dev.laurel.client.IMinecraft.mc;
 
 @Getter
-@ModuleInfo(name = "Sprint", description = "Makes you sprint", moduleCategory = ModuleCategory.MOTION)
+@ModuleInfo(name = "Sprint", description = "Makes you sprint", moduleCategory = ModuleCategory.MOVEMENT)
 public final class SprintModule extends Module {
 
     private final BooleanSetting testBoolean = new BooleanSetting("TestBoolean", false);
     private final ModeSetting testMode = new ModeSetting("TestMode", "Easy", "Normal", "Hard");
-    private final NumberSetting testNumber = new NumberSetting("TestNumber", 1, 0, 10, 1);
+    private final NumberSetting testNumber = new NumberSetting("TestNumber", 10, 0, 10, 1);
 
     public SprintModule() {
         this.setEnabled(true);

@@ -1,6 +1,8 @@
 package dev.laurel.module;
 
+import dev.laurel.module.impl.motion.NoJumpDelayModule;
 import dev.laurel.module.impl.motion.SprintModule;
+import dev.laurel.module.impl.player.InventoryMoveModule;
 import dev.laurel.module.impl.visual.HUDModule;
 import lombok.Getter;
 import lombok.SneakyThrows;
@@ -18,6 +20,8 @@ public final class ModuleManager {
         this.modules = new HashMap<>();
         this.addModule(SprintModule.class);
         this.addModule(HUDModule.class);
+        this.addModule(NoJumpDelayModule.class);
+        this.addModule(InventoryMoveModule.class);
     }
 
     public List<Module> getModulesInCategory(ModuleCategory moduleCategory) {

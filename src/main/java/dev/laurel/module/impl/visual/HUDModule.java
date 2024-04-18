@@ -35,7 +35,7 @@ public final class HUDModule extends Module {
         for (Module module : modules) {
             if (!module.isEnabled()) continue;
             Gui.drawRect(scaledResolution.getScaledWidth() - mc.fontRendererObj.getStringWidth(module.getName()) - 4, count * (mc.fontRendererObj.FONT_HEIGHT + 2), scaledResolution.getScaledWidth(), count * (mc.fontRendererObj.FONT_HEIGHT + 2) + mc.fontRendererObj.FONT_HEIGHT + 2, new Color(0, 0, 0, 80).getRGB());
-            int color = ColorUtil.blend(new Color(8, 65, 92), new Color(204, 41, 54), (float) ((Math.sin((System.currentTimeMillis() / 500D) % 1000 - count) + 1D) / 2F)).getRGB();
+            int color = ColorUtil.blend(new Color(80, 220, 220), new Color(180, 240, 40), (float) (Math.sin((System.currentTimeMillis() / 500D) % 1000 - count) + 1D) / 2F).getRGB();
             mc.fontRendererObj.drawStringWithShadow(module.getName(), scaledResolution.getScaledWidth() - mc.fontRendererObj.getStringWidth(module.getName()) - 2, 2 + count * (mc.fontRendererObj.FONT_HEIGHT + 2), color);
             count++;
         }

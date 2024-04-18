@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
+
+import lombok.Setter;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -183,7 +185,7 @@ public abstract class EntityLivingBase extends Entity
     private float landMovementFactor;
 
     /** Number of ticks since last jump */
-    private int jumpTicks;
+    @Setter private int jumpTicks;
     private float absorptionAmount;
 
     /**

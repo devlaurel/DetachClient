@@ -7,7 +7,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum ModuleCategory {
     COMBAT("Combat"),
-    MOTION("Motion"),
+    MOVEMENT("Movement"),
     PLAYER("Player"),
     VISUAL("Visual"),
     MISC("Misc"),;

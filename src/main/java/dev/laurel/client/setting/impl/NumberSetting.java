@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class NumberSetting extends Setting {
+public final class NumberSetting extends Setting {
     private double value;
     private final double min, max, increment;
 
@@ -16,5 +16,9 @@ public class NumberSetting extends Setting {
         this.min = min;
         this.max = max;
         this.increment = increment;
+    }
+
+    private double clamp(double value) {
+        return Math.min(max, Math.max(min, value));
     }
 }

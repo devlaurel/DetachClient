@@ -5,6 +5,6 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class Setting {
+public abstract class Setting {
     private final String name;
 }
