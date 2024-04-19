@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.Callable;
+
+import dev.laurel.client.Client;
+import dev.laurel.event.EventMoveFlying;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFence;
 import net.minecraft.block.BlockFenceGate;
@@ -1229,8 +1232,12 @@ public abstract class Entity implements ICommandSender
             f = friction / f;
             strafe = strafe * f;
             forward = forward * f;
-            float f1 = MathHelper.sin(this.rotationYaw * (float)Math.PI / 180.0F);
-            float f2 = MathHelper.cos(this.rotationYaw * (float)Math.PI / 180.0F);
+
+            EventMoveFlying eventMoveFlying = new EventMoveFlying(this.rotationYaw);
+            Client.INSTANCE.getEventBus().publish(eventMoveFlying);
+
+            float f1 = MathHelper.sin(eventMoveFlying.getYaw() * (float)Math.PI / 180.0F);
+            float f2 = MathHelper.cos(eventMoveFlying.getYaw() * (float)Math.PI / 180.0F);
             this.motionX += (double)(strafe * f2 - forward * f1);
             this.motionZ += (double)(forward * f2 + strafe * f1);
         }

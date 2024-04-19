@@ -1,5 +1,6 @@
 package net.minecraft.util;
 
+import lombok.Setter;
 import net.minecraft.client.Minecraft;
 
 public class Timer
@@ -27,7 +28,7 @@ public class Timer
      * A multiplier to make the timer (and therefore the game) go faster or slower.  0.5 makes the game run at half-
      * speed.
      */
-    public float timerSpeed = 1.0F;
+    @Setter public float timerSpeed = 1.0F;
 
     /**
      * How much time has elapsed since the last tick, in ticks (range: 0.0 - 1.0).

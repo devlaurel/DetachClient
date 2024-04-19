@@ -1,12 +1,22 @@
 package dev.laurel.module;
 
-import dev.laurel.module.impl.motion.NoJumpDelayModule;
-import dev.laurel.module.impl.motion.SprintModule;
+import dev.laurel.module.impl.combat.AutoClicker;
+import dev.laurel.module.impl.combat.KillAuraModule;
+import dev.laurel.module.impl.combat.VelocityModule;
+import dev.laurel.module.impl.misc.TimerModule;
+import dev.laurel.module.impl.movement.MovementFixModule;
+import dev.laurel.module.impl.movement.NoJumpDelayModule;
+import dev.laurel.module.impl.movement.SprintModule;
+import dev.laurel.module.impl.player.ChestStealerModule;
+import dev.laurel.module.impl.player.FastPlaceModule;
 import dev.laurel.module.impl.player.InventoryMoveModule;
+import dev.laurel.module.impl.visual.BrightnessModule;
 import dev.laurel.module.impl.visual.HUDModule;
+import dev.laurel.module.impl.visual.NoHurtCamModule;
 import lombok.Getter;
 import lombok.SneakyThrows;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,15 +28,28 @@ public final class ModuleManager {
 
     public ModuleManager() {
         this.modules = new HashMap<>();
-        this.addModule(SprintModule.class);
+        this.addModule(AutoClicker.class);
+        this.addModule(BrightnessModule.class);
+        this.addModule(ChestStealerModule.class);
+        this.addModule(FastPlaceModule.class);
         this.addModule(HUDModule.class);
-        this.addModule(NoJumpDelayModule.class);
         this.addModule(InventoryMoveModule.class);
+        this.addModule(KillAuraModule.class);
+        this.addModule(MovementFixModule.class);
+        this.addModule(NoHurtCamModule.class);
+        this.addModule(NoJumpDelayModule.class);
+        this.addModule(VelocityModule.class);
+        this.addModule(SprintModule.class);
+        this.addModule(TimerModule.class);
     }
 
     public List<Module> getModulesInCategory(ModuleCategory moduleCategory) {
-        return this.modules.values().stream().filter(module -> module.getModuleCategory() == moduleCategory).collect(Collectors.toList());
+        return this.modules.values().stream()
+                .filter(module -> module.getModuleCategory() == moduleCategory)
+                .sorted(Comparator.comparing(Module::getName))
+                .collect(Collectors.toList());
     }
+
 
     @SneakyThrows
     private void addModule(Class<? extends Module> moduleClass) {

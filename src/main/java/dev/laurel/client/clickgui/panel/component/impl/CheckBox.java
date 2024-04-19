@@ -16,16 +16,13 @@ public final class CheckBox extends Component {
 
     public CheckBox(Module module, Setting setting, int offset) {
         super(module, setting, offset);
-        booleanSetting = (BooleanSetting) setting;
+        this.booleanSetting = (BooleanSetting) setting;
     }
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        GlStateManager.pushMatrix();
-        GlStateManager.scale(PanelClickGUI.INSTANCE.getScale(), PanelClickGUI.INSTANCE.getScale(), 1F);
         mc.fontRendererObj.drawStringWithShadow(this.booleanSetting.getName() + ": ", 40 + 102 + 4, 62 + 4 + 4 * (mc.fontRendererObj.FONT_HEIGHT + 2) + this.getOffset() * (mc.fontRendererObj.FONT_HEIGHT + 4), Color.lightGray.getRGB());
         mc.fontRendererObj.drawStringWithShadow(String.valueOf(this.booleanSetting.isEnabled()), 40 + 102 + 4 + mc.fontRendererObj.getStringWidth(this.booleanSetting.getName() + ": "), 62 + 4 + 4 * (mc.fontRendererObj.FONT_HEIGHT + 2) + this.getOffset() * (mc.fontRendererObj.FONT_HEIGHT + 4), this.booleanSetting.isEnabled() ? Color.green.getRGB() : Color.red.getRGB());
-        GlStateManager.popMatrix();
     }
 
     @Override
@@ -43,6 +40,6 @@ public final class CheckBox extends Component {
     }
 
     private boolean isRectHovered(int mouseX, int mouseY, int x, int y, int width, int height) {
-        return mouseX >= x * PanelClickGUI.INSTANCE.getScale() && mouseX <= (x + width) * PanelClickGUI.INSTANCE.getScale() && mouseY >= y * PanelClickGUI.INSTANCE.getScale() && mouseY <= (y + height) * PanelClickGUI.INSTANCE.getScale();
+        return mouseX >= x && mouseX <= x + width && mouseY >= y && mouseY <= y + height;
     }
 }

@@ -26,8 +26,6 @@ public final class Slider extends Component {
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        GlStateManager.pushMatrix();
-        GlStateManager.scale(PanelClickGUI.INSTANCE.getScale(), PanelClickGUI.INSTANCE.getScale(), 1F);
         mc.fontRendererObj.drawStringWithShadow(this.numberSetting.getName() + ": ", 40 + 102 + 4, 62 + 4 + 4 * (mc.fontRendererObj.FONT_HEIGHT + 2) + this.getOffset() * (mc.fontRendererObj.FONT_HEIGHT + 4), Color.lightGray.getRGB());
 
         // Box
@@ -49,7 +47,6 @@ public final class Slider extends Component {
         }
 
         mc.fontRendererObj.drawStringWithShadow(String.valueOf(this.numberSetting.getValue()), 40 + 102 + 4 + mc.fontRendererObj.getStringWidth(this.numberSetting.getName() + ": ") + 120 / 2F - (mc.fontRendererObj.getStringWidth(String.valueOf(this.numberSetting.getValue())) / 2F), 62 + 4 + 4 * (mc.fontRendererObj.FONT_HEIGHT + 2) + this.getOffset() * (mc.fontRendererObj.FONT_HEIGHT + 4), Color.lightGray.getRGB());
-        GlStateManager.popMatrix();
     }
 
     @Override
@@ -72,7 +69,7 @@ public final class Slider extends Component {
     }
 
     private boolean isRectHovered(int mouseX, int mouseY, int x, int y, int width, int height) {
-        return mouseX >= x * PanelClickGUI.INSTANCE.getScale() && mouseX <= (x + width) * PanelClickGUI.INSTANCE.getScale() && mouseY >= y * PanelClickGUI.INSTANCE.getScale() && mouseY <= (y + height) * PanelClickGUI.INSTANCE.getScale();
+        return mouseX >= x && mouseX <= x + width && mouseY >= y && mouseY <= y + height;
     }
 
     private double roundToPlace(double value, int place) {

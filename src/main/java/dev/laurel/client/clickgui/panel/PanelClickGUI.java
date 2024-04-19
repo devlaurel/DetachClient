@@ -11,11 +11,10 @@ import dev.laurel.client.setting.impl.ModeSetting;
 import dev.laurel.client.setting.impl.NumberSetting;
 import dev.laurel.module.Module;
 import dev.laurel.module.ModuleCategory;
-import dev.laurel.module.impl.motion.SprintModule;
+import dev.laurel.module.impl.combat.KillAuraModule;
 import dev.laurel.util.DrawUtil;
 import lombok.Getter;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.renderer.GlStateManager;
 import org.lwjgl.input.Keyboard;
 
 import java.awt.*;
@@ -27,16 +26,16 @@ import java.util.List;
 public final class PanelClickGUI extends GuiScreen {
     public static final PanelClickGUI INSTANCE = new PanelClickGUI();
 
-    private final float scale = 1F;
-
     private ModuleCategory selectedModuleCategory;
     private Module selectedModule;
 
     private final List<Component> components;
 
+    private boolean listeningToKey = false;
+
     public PanelClickGUI() {
         this.selectedModuleCategory = ModuleCategory.MOVEMENT;
-        this.selectedModule = Client.INSTANCE.getModuleManager().getModule(SprintModule.class);
+        this.selectedModule = Client.INSTANCE.getModuleManager().getModule(KillAuraModule.class);
         components = new ArrayList<>();
 
         int offset = 0;
@@ -59,8 +58,6 @@ public final class PanelClickGUI extends GuiScreen {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         super.drawScreen(mouseX, mouseY, partialTicks);
 
-        GlStateManager.pushMatrix();
-        GlStateManager.scale(this.scale, this.scale, 1F);
         // Title bar
         DrawUtil.drawFilledRect(40, 28, 400, 12, new Color(32, 32, 32));
         mc.fontRendererObj.drawStringWithShadow("ClickGUI", 42, 30, Color.lightGray.getRGB());
@@ -86,11 +83,10 @@ public final class PanelClickGUI extends GuiScreen {
 
         mc.fontRendererObj.drawStringWithShadow(this.selectedModule.getName() + ":", 40 + 102 + 4, 62 + 4, new Color(100, 150, 200).getRGB());
         mc.fontRendererObj.drawStringWithShadow(this.selectedModule.getDescription(), 40 + 102 + 4 + mc.fontRendererObj.getStringWidth(this.selectedModule.getName() + ": "), 62 + 4, Color.gray.getRGB());
-        mc.fontRendererObj.drawStringWithShadow("Key: " + Keyboard.getKeyName(this.selectedModule.getKey()), 40 + 102 + 4, 62 + 4 + (mc.fontRendererObj.FONT_HEIGHT + 2), Color.lightGray.getRGB());
+        String key = this.listeningToKey ? "..." : Keyboard.getKeyName(this.selectedModule.getKey());
+        mc.fontRendererObj.drawStringWithShadow("Key: " + key, 40 + 102 + 4, 62 + 4 + (mc.fontRendererObj.FONT_HEIGHT + 2), Color.lightGray.getRGB());
 
         mc.fontRendererObj.drawStringWithShadow("Settings: ", 40 + 102 + 4, 62 + 4 + (mc.fontRendererObj.FONT_HEIGHT + 2) * 3, new Color(240, 160, 0).getRGB());
-
-        GlStateManager.popMatrix();
 
         for (Component component : this.components) {
             if (component.getModule() == this.selectedModule) {
@@ -119,6 +115,10 @@ public final class PanelClickGUI extends GuiScreen {
                     module.toggle();
                 }
                 count2++;
+            }
+
+            if (this.isRectHovered(mouseX, mouseY, 40 + 102 + 4, 62 + 4 + (mc.fontRendererObj.FONT_HEIGHT + 2), mc.fontRendererObj.getStringWidth("Key: " + Keyboard.getKeyName(this.selectedModule.getKey())), mc.fontRendererObj.FONT_HEIGHT)) {
+                this.listeningToKey = true;
             }
         } else if (mouseButton == 1) {
 
@@ -150,11 +150,26 @@ public final class PanelClickGUI extends GuiScreen {
     }
 
     @Override
+    protected void keyTyped(char typedChar, int keyCode) throws IOException {
+        super.keyTyped(typedChar, keyCode);
+
+        if (this.listeningToKey) {
+            if (!(keyCode == 1)) {
+                this.selectedModule.setKey(keyCode);
+            }
+            if (keyCode == Keyboard.KEY_DELETE) {
+                this.selectedModule.setKey(0);
+            }
+            this.listeningToKey = false;
+        }
+    }
+
+    @Override
     public boolean doesGuiPauseGame() {
         return false;
     }
 
     private boolean isRectHovered(int mouseX, int mouseY, int x, int y, int width, int height) {
-        return mouseX >= x * this.scale && mouseX <= (x + width) * this.scale && mouseY >= y * this.scale && mouseY <= (y + height) * this.scale;
+        return mouseX >= x && mouseX <= x + width && mouseY >= y && mouseY <= y + height;
     }
 }

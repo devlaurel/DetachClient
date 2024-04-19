@@ -10,6 +10,8 @@ import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
 
+import dev.laurel.client.Client;
+import dev.laurel.event.EventJump;
 import lombok.Setter;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -104,9 +106,11 @@ public abstract class EntityLivingBase extends Entity
 
     /** Entity head rotation yaw */
     public float rotationYawHead;
+    public float rotationPitchHead;
 
     /** Entity head rotation yaw at previous tick */
     public float prevRotationYawHead;
+    public float prevRotationPitchHead;
 
     /**
      * A factor used to determine how far this entity will move each tick if it is jumping or falling.
@@ -381,6 +385,7 @@ public abstract class EntityLivingBase extends Entity
         this.prevMovedDistance = this.movedDistance;
         this.prevRenderYawOffset = this.renderYawOffset;
         this.prevRotationYawHead = this.rotationYawHead;
+        this.prevRotationPitchHead = this.rotationPitchHead;
         this.prevRotationYaw = this.rotationYaw;
         this.prevRotationPitch = this.rotationPitch;
         this.worldObj.theProfiler.endSection();
@@ -1571,7 +1576,9 @@ public abstract class EntityLivingBase extends Entity
 
         if (this.isSprinting())
         {
-            float f = this.rotationYaw * 0.017453292F;
+            EventJump eventJump = new EventJump(this.rotationYaw);
+            Client.INSTANCE.getEventBus().publish(eventJump);
+            float f = eventJump.getYaw() * 0.017453292F;
             this.motionX -= (double)(MathHelper.sin(f) * 0.2F);
             this.motionZ += (double)(MathHelper.cos(f) * 0.2F);
         }

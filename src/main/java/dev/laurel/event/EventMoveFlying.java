@@ -3,10 +3,12 @@ package dev.laurel.event;
 import dev.codeman.eventbus.Event;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import net.minecraft.network.Packet;
+import lombok.Setter;
 
 @Getter
+@Setter
 @AllArgsConstructor
-public final class EventPacketReceive extends Event {
-    private final Packet<?> packet;
+public final class EventMoveFlying extends Event {
+    private float yaw;
 }
+

@@ -14,9 +14,9 @@ import org.lwjgl.input.Keyboard;
 import static dev.laurel.client.IMinecraft.mc;
 
 @ModuleInfo(name = "InventoryMove", description = "Allows you to move in GUIs", moduleCategory = ModuleCategory.PLAYER)
-public class InventoryMoveModule extends Module {
+public final class InventoryMoveModule extends Module {
 
-    private final BooleanSetting onlyClickGui = new BooleanSetting("Only ClickGUI", true);
+    private final BooleanSetting onlyClickGui = new BooleanSetting("OnlyClickGUI", true);
 
     public InventoryMoveModule() {
         this.addSettings(this.onlyClickGui);

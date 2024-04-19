@@ -1,5 +1,7 @@
 package net.minecraft.util;
 
+import dev.laurel.client.Client;
+import dev.laurel.event.EventMoveInput;
 import net.minecraft.client.settings.GameSettings;
 
 public class MovementInputFromOptions extends MovementInput
@@ -38,6 +40,14 @@ public class MovementInputFromOptions extends MovementInput
 
         this.jump = this.gameSettings.keyBindJump.isKeyDown();
         this.sneak = this.gameSettings.keyBindSneak.isKeyDown();
+
+        EventMoveInput eventMoveInput = new EventMoveInput(this.moveForward, this.moveStrafe, this.jump, this.sneak);
+        Client.INSTANCE.getEventBus().publish(eventMoveInput);
+
+        this.moveForward = eventMoveInput.getForward();
+        this.moveStrafe = eventMoveInput.getStrafe();
+        this.jump = eventMoveInput.isJump();
+        this.sneak = eventMoveInput.isSneak();
 
         if (this.sneak)
         {

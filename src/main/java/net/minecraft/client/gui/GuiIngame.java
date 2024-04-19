@@ -9,7 +9,6 @@ import java.util.Random;
 
 import dev.laurel.client.Client;
 import dev.laurel.event.EventRender2D;
-import lombok.SneakyThrows;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
