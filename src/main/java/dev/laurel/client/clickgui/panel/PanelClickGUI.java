@@ -62,7 +62,7 @@ public final class PanelClickGUI extends GuiScreen {
         DrawUtil.drawFilledRect(40, 28, 400, 12, new Color(32, 32, 32));
         mc.fontRendererObj.drawStringWithShadow("ClickGUI", 42, 30, Color.lightGray.getRGB());
         // Panel
-        DrawUtil.drawFilledRect(40, 40, 400, 280, new Color(0, 0, 0, 120));
+        DrawUtil.drawFilledRect(40, 40, 400, 280, new Color(0, 0, 0, 160));
         // Vertical line
         DrawUtil.drawFilledRect(40 + 100, 40, 2, 280, new Color(32, 32, 32));
         // Horizontal line
@@ -86,7 +86,9 @@ public final class PanelClickGUI extends GuiScreen {
         String key = this.listeningToKey ? "..." : Keyboard.getKeyName(this.selectedModule.getKey());
         mc.fontRendererObj.drawStringWithShadow("Key: " + key, 40 + 102 + 4, 62 + 4 + (mc.fontRendererObj.FONT_HEIGHT + 2), Color.lightGray.getRGB());
 
-        mc.fontRendererObj.drawStringWithShadow("Settings: ", 40 + 102 + 4, 62 + 4 + (mc.fontRendererObj.FONT_HEIGHT + 2) * 3, new Color(240, 160, 0).getRGB());
+        if (!this.selectedModule.getSettings().isEmpty()) {
+            mc.fontRendererObj.drawStringWithShadow("Settings: ", 40 + 102 + 4, 62 + 4 + (mc.fontRendererObj.FONT_HEIGHT + 2) * 3, new Color(240, 160, 0).getRGB());
+        }
 
         for (Component component : this.components) {
             if (component.getModule() == this.selectedModule) {

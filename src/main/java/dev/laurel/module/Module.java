@@ -14,6 +14,8 @@ public abstract class Module {
     private final String name, description;
     private final ModuleCategory moduleCategory;
 
+    @Setter private String suffix;
+
     @Setter private int key;
 
     private boolean enabled;
@@ -38,6 +40,7 @@ public abstract class Module {
         ModuleInfo moduleInfo = this.getClass().getAnnotation(ModuleInfo.class);
         this.name = moduleInfo.name();
         this.description = moduleInfo.description();
+        this.suffix = "";
         this.moduleCategory = moduleInfo.moduleCategory();
         this.settings = new ArrayList<>();
     }

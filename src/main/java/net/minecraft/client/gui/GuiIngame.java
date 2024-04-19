@@ -9,6 +9,7 @@ import java.util.Random;
 
 import dev.laurel.client.Client;
 import dev.laurel.event.EventRender2D;
+import dev.laurel.module.impl.visual.ScoreboardModule;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -547,8 +548,10 @@ public class GuiIngame extends Gui
         this.streamIndicator.render(p_180478_1_.getScaledWidth() - 10, 10);
     }
 
+    private final ScoreboardModule scoreboardModule = (ScoreboardModule) Client.INSTANCE.getModuleManager().getModule(ScoreboardModule.class);
     private void renderScoreboard(ScoreObjective p_180475_1_, ScaledResolution p_180475_2_)
     {
+        if (this.scoreboardModule.isEnabled() && this.scoreboardModule.getHideScoreboard().isEnabled()) return;
         Scoreboard scoreboard = p_180475_1_.getScoreboard();
         Collection<Score> collection = scoreboard.getSortedScores(p_180475_1_);
         List<Score> list = Lists.newArrayList(Iterables.filter(collection, new Predicate<Score>()

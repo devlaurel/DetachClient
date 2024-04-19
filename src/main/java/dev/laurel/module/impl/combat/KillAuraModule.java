@@ -5,6 +5,7 @@ import dev.codeman.eventbus.Listener;
 import dev.laurel.client.setting.impl.BooleanSetting;
 import dev.laurel.client.setting.impl.ModeSetting;
 import dev.laurel.client.setting.impl.NumberSetting;
+import dev.laurel.event.EventRender2D;
 import dev.laurel.event.EventUpdate;
 import dev.laurel.handler.RotationHandler;
 import dev.laurel.module.Module;
@@ -44,6 +45,9 @@ public final class KillAuraModule extends Module {
     public KillAuraModule() {
         this.addSettings(this.cps, this.clickMode, this.rotate, this.rotationRandomization, this.targetPlayers, this.targetMonsters, this.targetAnimals);
     }
+
+    @EventHandler
+    private final Listener<EventRender2D> eventRender2DListener = event -> this.setSuffix(String.valueOf(this.targets.size()));
 
     @EventHandler
     private final Listener<EventUpdate> eventUpdateListener = event -> {

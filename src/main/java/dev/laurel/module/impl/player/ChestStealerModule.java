@@ -4,6 +4,7 @@ import dev.codeman.eventbus.EventHandler;
 import dev.codeman.eventbus.Listener;
 import dev.laurel.client.setting.impl.BooleanSetting;
 import dev.laurel.client.setting.impl.NumberSetting;
+import dev.laurel.event.EventRender2D;
 import dev.laurel.event.EventUpdate;
 import dev.laurel.module.Module;
 import dev.laurel.module.ModuleCategory;
@@ -30,6 +31,9 @@ public final class ChestStealerModule extends Module {
     public ChestStealerModule() {
         this.addSettings(this.stealDelay, this.randomizeSlots, this.autoClose, this.checkTitle);
     }
+
+    @EventHandler
+    private final Listener<EventRender2D> eventRender2DListener = event -> this.setSuffix(String.valueOf(this.stealDelay.getValue()));
 
     @EventHandler
     private final Listener<EventUpdate> eventUpdateListener = event -> {

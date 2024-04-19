@@ -2,17 +2,14 @@ package dev.laurel.module;
 
 import dev.laurel.module.impl.combat.AutoClicker;
 import dev.laurel.module.impl.combat.KillAuraModule;
+import dev.laurel.module.impl.combat.NoClickDelayModule;
 import dev.laurel.module.impl.combat.VelocityModule;
 import dev.laurel.module.impl.misc.TimerModule;
-import dev.laurel.module.impl.movement.MovementFixModule;
-import dev.laurel.module.impl.movement.NoJumpDelayModule;
-import dev.laurel.module.impl.movement.SprintModule;
+import dev.laurel.module.impl.movement.*;
 import dev.laurel.module.impl.player.ChestStealerModule;
 import dev.laurel.module.impl.player.FastPlaceModule;
 import dev.laurel.module.impl.player.InventoryMoveModule;
-import dev.laurel.module.impl.visual.BrightnessModule;
-import dev.laurel.module.impl.visual.HUDModule;
-import dev.laurel.module.impl.visual.NoHurtCamModule;
+import dev.laurel.module.impl.visual.*;
 import lombok.Getter;
 import lombok.SneakyThrows;
 
@@ -31,14 +28,19 @@ public final class ModuleManager {
         this.addModule(AutoClicker.class);
         this.addModule(BrightnessModule.class);
         this.addModule(ChestStealerModule.class);
+        this.addModule(ESPModule.class);
         this.addModule(FastPlaceModule.class);
+        this.addModule(FlightModule.class);
         this.addModule(HUDModule.class);
         this.addModule(InventoryMoveModule.class);
         this.addModule(KillAuraModule.class);
         this.addModule(MovementFixModule.class);
+        this.addModule(NoClickDelayModule.class);
         this.addModule(NoHurtCamModule.class);
         this.addModule(NoJumpDelayModule.class);
+        this.addModule(NoSlowDown.class);
         this.addModule(VelocityModule.class);
+        this.addModule(ScoreboardModule.class);
         this.addModule(SprintModule.class);
         this.addModule(TimerModule.class);
     }

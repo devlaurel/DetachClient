@@ -3,6 +3,7 @@ package net.minecraft.client.entity;
 import dev.laurel.client.Client;
 import dev.laurel.event.EventLook;
 import dev.laurel.event.EventMotion;
+import dev.laurel.event.EventSlowdown;
 import dev.laurel.event.EventUpdate;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.MovingSoundMinecartRiding;
@@ -794,11 +795,14 @@ public class EntityPlayerSP extends AbstractClientPlayer
         boolean flag2 = this.movementInput.moveForward >= f;
         this.movementInput.updatePlayerMoveState();
 
-        if (this.isUsingItem() && !this.isRiding())
-        {
-            this.movementInput.moveStrafe *= 0.2F;
-            this.movementInput.moveForward *= 0.2F;
-            this.sprintToggleTimer = 0;
+        EventSlowdown eventSlowdown = new EventSlowdown();
+        Client.INSTANCE.getEventBus().publish(eventSlowdown);
+        if (!eventSlowdown.isCancelled()) {
+            if (this.isUsingItem() && !this.isRiding()) {
+                this.movementInput.moveStrafe *= 0.2F;
+                this.movementInput.moveForward *= 0.2F;
+                this.sprintToggleTimer = 0;
+            }
         }
 
         this.pushOutOfBlocks(this.posX - (double)this.width * 0.35D, this.getEntityBoundingBox().minY + 0.5D, this.posZ + (double)this.width * 0.35D);

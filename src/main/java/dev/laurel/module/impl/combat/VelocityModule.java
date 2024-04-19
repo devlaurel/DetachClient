@@ -4,6 +4,7 @@ import dev.codeman.eventbus.EventHandler;
 import dev.codeman.eventbus.Listener;
 import dev.laurel.client.setting.impl.ModeSetting;
 import dev.laurel.event.EventPacketReceive;
+import dev.laurel.event.EventRender2D;
 import dev.laurel.module.Module;
 import dev.laurel.module.ModuleCategory;
 import dev.laurel.module.ModuleInfo;
@@ -20,6 +21,9 @@ public final class VelocityModule extends Module {
     public VelocityModule() {
         this.addSettings(this.mode);
     }
+
+    @EventHandler
+    private final Listener<EventRender2D> eventRender2DListener = event -> this.setSuffix(String.valueOf(this.mode.getCurrentMode()));
 
     @EventHandler
     private final Listener<EventPacketReceive> eventPacketReceiveListener = event -> {

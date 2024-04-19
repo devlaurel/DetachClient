@@ -3,6 +3,7 @@ package dev.laurel.module.impl.combat;
 import dev.codeman.eventbus.EventHandler;
 import dev.codeman.eventbus.Listener;
 import dev.laurel.client.setting.impl.NumberSetting;
+import dev.laurel.event.EventRender2D;
 import dev.laurel.event.EventUpdate;
 import dev.laurel.module.Module;
 import dev.laurel.module.ModuleCategory;
@@ -21,6 +22,9 @@ public final class AutoClicker extends Module {
     public AutoClicker() {
         this.addSettings(this.cps);
     }
+
+    @EventHandler
+    private final Listener<EventRender2D> eventRender2DListener = event -> this.setSuffix(String.valueOf(this.cps.getValue()));
 
     @EventHandler
     private final Listener<EventUpdate> eventUpdateListener = event -> {
