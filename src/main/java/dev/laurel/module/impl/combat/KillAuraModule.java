@@ -34,10 +34,10 @@ public final class KillAuraModule extends Module {
 
     private final TimeHelper timeHelper = new TimeHelper();
 
-    private final NumberSetting cps = new NumberSetting("CPS", 8, 1, 20, 0.5);
+    private final NumberSetting cps = new NumberSetting("CPS", 8, 1, 20, 0.1);
     private final ModeSetting clickMode = new ModeSetting("ClickMode", "RealClick", "Packet");
     private final BooleanSetting rotate = new BooleanSetting("Rotate", true);
-    private final NumberSetting rotationRandomization = new NumberSetting("RotationRandomization", 2, 0, 6, 0.5);
+    private final NumberSetting rotationRandomization = new NumberSetting("RotationRandomization", 2, 0, 6, 0.1);
     private final BooleanSetting targetPlayers = new BooleanSetting("TargetPlayers", true);
     private final BooleanSetting targetMonsters = new BooleanSetting("TargetMonsters", false);
     private final BooleanSetting targetAnimals = new BooleanSetting("TargetAnimals", false);
@@ -73,11 +73,11 @@ public final class KillAuraModule extends Module {
         float pitchToTarget = rotationsToTarget[1];
 
         if (this.rotate.isEnabled()) {
-            RotationHandler.INSTANCE.setServersideYaw(yawToTarget + RandomUtil.randomFloat((float) -this.rotationRandomization.getValue(), (float) this.rotationRandomization.getValue()));
-            RotationHandler.INSTANCE.setServersidePitch(pitchToTarget + RandomUtil.randomFloat((float) -this.rotationRandomization.getValue(), (float) this.rotationRandomization.getValue()));
+            RotationHandler.INSTANCE.setServersideYaw((float) (yawToTarget + RandomUtil.randomDouble(-this.rotationRandomization.getValue(), (float) this.rotationRandomization.getValue())));
+            RotationHandler.INSTANCE.setServersidePitch((float) (pitchToTarget + RandomUtil.randomDouble(-this.rotationRandomization.getValue(), (float) this.rotationRandomization.getValue())));
         }
 
-        if (this.timeHelper.hasPassed((long) (1000 / this.cps.getValue() * RandomUtil.randomFloat(0.1F, 2F)))) {
+        if (this.timeHelper.hasPassed((long) (1000 / this.cps.getValue() * RandomUtil.randomDouble(0.1, 2)))) {
             if (mc.thePlayer.isUsingItem()) return;
             switch (this.clickMode.getCurrentMode()) {
                 case "RealClick":

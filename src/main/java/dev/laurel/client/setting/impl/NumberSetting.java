@@ -5,9 +5,15 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter
-@Setter
 public final class NumberSetting extends Setting {
     private double value;
+
+    public void setValue(double value) {
+//        value = this.clamp(value);
+//        value = Math.round(value / this.increment) * this.increment;
+        this.value = value;
+    }
+
     private final double min, max, increment;
 
     public NumberSetting(String name, double defaultValue, double min, double max, double increment) {

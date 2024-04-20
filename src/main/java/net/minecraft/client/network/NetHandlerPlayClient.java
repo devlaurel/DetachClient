@@ -4,6 +4,8 @@ import com.google.common.collect.Maps;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.mojang.authlib.GameProfile;
+import dev.laurel.client.Client;
+import dev.laurel.event.EventPacketSend;
 import io.netty.buffer.Unpooled;
 import java.io.File;
 import java.io.IOException;
@@ -811,9 +813,12 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
         }
     }
 
-    public void addToSendQueue(Packet p_147297_1_)
+    public void addToSendQueue(Packet packet)
     {
-        this.netManager.sendPacket(p_147297_1_);
+        EventPacketSend eventPacketSend = new EventPacketSend(packet);
+        Client.INSTANCE.getEventBus().publish(eventPacketSend);
+        if (eventPacketSend.isCancelled()) return;
+        this.netManager.sendPacket(packet);
     }
 
     public void handleCollectItem(S0DPacketCollectItem packetIn)

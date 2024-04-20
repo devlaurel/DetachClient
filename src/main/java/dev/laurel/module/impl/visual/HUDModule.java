@@ -4,7 +4,10 @@ import dev.codeman.eventbus.EventHandler;
 import dev.codeman.eventbus.Listener;
 import dev.laurel.client.Client;
 import dev.laurel.client.setting.impl.BooleanSetting;
+import dev.laurel.client.setting.impl.ModeSetting;
+import dev.laurel.client.setting.impl.NumberSetting;
 import dev.laurel.event.EventRender2D;
+import dev.laurel.handler.ThemeManager;
 import dev.laurel.module.Module;
 import dev.laurel.module.ModuleCategory;
 import dev.laurel.module.ModuleInfo;
@@ -22,12 +25,13 @@ import static dev.laurel.client.IMinecraft.mc;
 @ModuleInfo(name = "HUD", description = "Displays the client's HUD", moduleCategory = ModuleCategory.VISUAL)
 public final class HUDModule extends Module {
 
-    private final BooleanSetting textBackground = new BooleanSetting("TextBackground", true);
+    private final NumberSetting textBackgroundOpacity = new NumberSetting("TextBackgroundOpacity", 120, 0, 255, 5);
     private final BooleanSetting hideVisualModules = new BooleanSetting("HideVisualModules", false);
+    private final ModeSetting colorTheme = new ModeSetting("ColorTheme", "DeepSea", "PornHub", "Tenacity", "Aqua", "Navy");
 
     public HUDModule() {
         this.setEnabled(true);
-        this.addSettings(this.textBackground, this.hideVisualModules);
+        this.addSettings(this.textBackgroundOpacity,this.hideVisualModules, this.colorTheme);
     }
 
     @EventHandler
@@ -43,11 +47,10 @@ public final class HUDModule extends Module {
             final boolean hasModuleSuffix = !Objects.equals(module.getSuffix(), "");
 
             if (this.hideVisualModules.isEnabled() && module.getModuleCategory() == ModuleCategory.VISUAL) continue;
-            if (this.textBackground.isEnabled()) {
-                Gui.drawRect(scaledResolution.getScaledWidth() - mc.fontRendererObj.getStringWidth(module.getName() + (hasModuleSuffix ? " " + module.getSuffix() : "")) - 4, count * (mc.fontRendererObj.FONT_HEIGHT + 2), scaledResolution.getScaledWidth(), count * (mc.fontRendererObj.FONT_HEIGHT + 2) + mc.fontRendererObj.FONT_HEIGHT + 2, new Color(0, 0, 0, 80).getRGB());
-            }
+            Gui.drawRect(scaledResolution.getScaledWidth() - mc.fontRendererObj.getStringWidth(module.getName() + (hasModuleSuffix ? " " + module.getSuffix() : "")) - 4, count * (mc.fontRendererObj.FONT_HEIGHT + 2), scaledResolution.getScaledWidth(), count * (mc.fontRendererObj.FONT_HEIGHT + 2) + mc.fontRendererObj.FONT_HEIGHT + 2, new Color(0, 0, 0, (int) textBackgroundOpacity.getValue()).getRGB());
 
-            int color = ColorUtil.blend(new Color(13, 59, 102), new Color(250, 240, 202), (float) (Math.sin((System.currentTimeMillis() / 500D) % 1000 - count) + 1D) / 2F).getRGB();
+            Color[] themeColors = ThemeManager.INSTANCE.getColorTheme(colorTheme.getCurrentMode());
+            int color = ColorUtil.blend(themeColors[0], themeColors[1], (float) (Math.sin((System.currentTimeMillis() / 250D) % 1000 - count) + 1D) / 2F).getRGB();
             mc.fontRendererObj.drawStringWithShadow(module.getName(), scaledResolution.getScaledWidth() - mc.fontRendererObj.getStringWidth(module.getName() + (hasModuleSuffix ? " " + module.getSuffix() : "")) - 2, 2 + count * (mc.fontRendererObj.FONT_HEIGHT + 2), color);
             mc.fontRendererObj.drawStringWithShadow(module.getSuffix(), scaledResolution.getScaledWidth() - mc.fontRendererObj.getStringWidth(module.getSuffix()) - 2, 2 + count * (mc.fontRendererObj.FONT_HEIGHT + 2), Color.lightGray.getRGB());
             count++;

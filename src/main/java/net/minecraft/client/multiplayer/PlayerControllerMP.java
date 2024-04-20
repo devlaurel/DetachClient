@@ -1,5 +1,7 @@
 package net.minecraft.client.multiplayer;
 
+import dev.laurel.client.Client;
+import dev.laurel.event.EventAttack;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -496,6 +498,8 @@ public class PlayerControllerMP
      */
     public void attackEntity(EntityPlayer playerIn, Entity targetEntity)
     {
+        EventAttack eventAttack = new EventAttack(playerIn, targetEntity);
+        Client.INSTANCE.getEventBus().publish(eventAttack);
         this.syncCurrentPlayItem();
         this.netClientHandler.addToSendQueue(new C02PacketUseEntity(targetEntity, C02PacketUseEntity.Action.ATTACK));
 

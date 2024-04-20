@@ -13,6 +13,8 @@ import dev.laurel.util.TimeHelper;
 import net.minecraft.client.gui.inventory.GuiChest;
 import net.minecraft.inventory.ContainerChest;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import static dev.laurel.client.IMinecraft.mc;
@@ -40,17 +42,26 @@ public final class ChestStealerModule extends Module {
         if (!(mc.currentScreen instanceof GuiChest)) return;
         ContainerChest chest = (ContainerChest) mc.thePlayer.openContainer;
 
+        List<Integer> filledSlots = new ArrayList<>();
+
         for (int i = 0; i < chest.getLowerChestInventory().getSizeInventory(); i++) {
-            if (chest.getLowerChestInventory().getStackInSlot(i) == null) continue;
-
-            if (this.checkTitle.isEnabled() && !chest.getLowerChestInventory().getDisplayName().getUnformattedText().equals("Chest")) return;
-
-            if (this.timeHelper.hasPassed((long) this.stealDelay.getValue())) {
-                int slot = this.randomizeSlots.isEnabled() ? this.random.nextInt(chest.getLowerChestInventory().getSizeInventory()) : i;
-                mc.playerController.windowClick(chest.windowId, slot, 0, 1, mc.thePlayer);
-                if (this.autoClose.isEnabled() && this.isChestEmpty(chest)) mc.thePlayer.closeScreen();
-                this.timeHelper.reset();
+            if (chest.getLowerChestInventory().getStackInSlot(i) != null) {
+                filledSlots.add(i);
             }
+        }
+
+        if (this.checkTitle.isEnabled() && !chest.getLowerChestInventory().getDisplayName().getUnformattedText().equals("Chest")) return;
+
+        if (this.timeHelper.hasPassed((long) this.stealDelay.getValue())) {
+            int slot;
+            if (this.randomizeSlots.isEnabled()) {
+                slot = filledSlots.get(this.random.nextInt(filledSlots.size()));
+            } else {
+                slot = filledSlots.isEmpty() ? 0 : filledSlots.get(0);
+            }
+            mc.playerController.windowClick(chest.windowId, slot, 0, 1, mc.thePlayer);
+            if (this.autoClose.isEnabled() && this.isChestEmpty(chest)) mc.thePlayer.closeScreen();
+            this.timeHelper.reset();
         }
     };
 

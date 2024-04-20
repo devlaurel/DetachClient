@@ -10,7 +10,7 @@ import org.lwjgl.input.Keyboard;
 import static dev.laurel.client.IMinecraft.mc;
 
 @ModuleInfo(name = "ClickGUI", description = "Displays a ClickGUI", moduleCategory = ModuleCategory.VISUAL)
-public class ClickGUI extends Module {
+public final class ClickGUI extends Module {
 
     private final ModeSetting clickGui = new ModeSetting("Mode", "Augustus");
 

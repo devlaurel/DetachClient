@@ -1,5 +1,7 @@
 package net.minecraft.client.renderer;
 
+import dev.laurel.client.Client;
+import dev.laurel.module.impl.visual.AnimationsModule;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -34,6 +36,7 @@ import org.lwjgl.opengl.GL11;
 
 public class ItemRenderer
 {
+    private final AnimationsModule animationsModule = (AnimationsModule) Client.INSTANCE.getModuleManager().getModule(AnimationsModule.class);
     private static final ResourceLocation RES_MAP_BACKGROUND = new ResourceLocation("textures/map/map_background.png");
     private static final ResourceLocation RES_UNDERWATER_OVERLAY = new ResourceLocation("textures/misc/underwater.png");
 
@@ -285,7 +288,8 @@ public class ItemRenderer
         GlStateManager.rotate(f * -20.0F, 0.0F, 1.0F, 0.0F);
         GlStateManager.rotate(f1 * -20.0F, 0.0F, 0.0F, 1.0F);
         GlStateManager.rotate(f1 * -80.0F, 1.0F, 0.0F, 0.0F);
-        GlStateManager.scale(0.4F, 0.4F, 0.4F);
+        double scale = this.animationsModule.isEnabled() ? this.animationsModule.getItemScale().getValue() : 0.4F;
+        GlStateManager.scale(scale, scale, scale);
     }
 
     private void func_178098_a(float p_178098_1_, AbstractClientPlayer clientPlayer)
@@ -377,8 +381,15 @@ public class ItemRenderer
                 }
                 else
                 {
-                    this.func_178105_d(f1);
-                    this.transformFirstPersonItem(f, f1);
+                    if (this.animationsModule.isEnabled()) {
+                        if (!this.animationsModule.getNoTranslate().isEnabled()) {
+                            this.func_178105_d(f1);
+                        }
+                        this.transformFirstPersonItem(f, f1);
+                    } else {
+                        this.func_178105_d(f1);
+                        this.transformFirstPersonItem(f, f1);
+                    }
                 }
 
                 this.renderItem(abstractclientplayer, this.itemToRender, ItemCameraTransforms.TransformType.FIRST_PERSON);

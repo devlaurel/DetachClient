@@ -1,9 +1,6 @@
 package dev.laurel.module;
 
-import dev.laurel.module.impl.combat.AutoClickerModule;
-import dev.laurel.module.impl.combat.KillAuraModule;
-import dev.laurel.module.impl.combat.NoClickDelayModule;
-import dev.laurel.module.impl.combat.VelocityModule;
+import dev.laurel.module.impl.combat.*;
 import dev.laurel.module.impl.misc.TimerModule;
 import dev.laurel.module.impl.movement.*;
 import dev.laurel.module.impl.player.ChestStealerModule;
@@ -27,6 +24,7 @@ public final class ModuleManager {
         this.modules = new HashMap<>();
         this.addModule(AutoClickerModule.class);
         this.addModule(BrightnessModule.class);
+        this.addModule(AnimationsModule.class);
         this.addModule(ChestStealerModule.class);
         this.addModule(ESPModule.class);
         this.addModule(FastPlaceModule.class);
@@ -42,6 +40,7 @@ public final class ModuleManager {
         this.addModule(VelocityModule.class);
         this.addModule(ScoreboardModule.class);
         this.addModule(SprintModule.class);
+        this.addModule(StepModule.class);
         this.addModule(TimerModule.class);
         this.addModule(ClickGUI.class);
     }

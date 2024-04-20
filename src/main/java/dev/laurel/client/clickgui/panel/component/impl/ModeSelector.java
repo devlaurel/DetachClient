@@ -22,10 +22,13 @@ public final class ModeSelector extends Component {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         mc.fontRendererObj.drawStringWithShadow(this.modeSetting.getName() + ": ", 40 + 102 + 4, 62 + 4 + 4 * (mc.fontRendererObj.FONT_HEIGHT + 2) + this.getOffset() * (mc.fontRendererObj.FONT_HEIGHT + 4), Color.lightGray.getRGB());
         int count = 0;
-        for (String mode : this.modeSetting.getModes()) {
-            mc.fontRendererObj.drawStringWithShadow(mode, 40 + 102 + 4 + mc.fontRendererObj.getStringWidth(this.modeSetting.getName() + ": ") + count, 62 + 4 + 4 * (mc.fontRendererObj.FONT_HEIGHT + 2) + this.getOffset() * (mc.fontRendererObj.FONT_HEIGHT + 4), Objects.equals(mode, this.modeSetting.getCurrentMode()) ? new Color(100, 150, 200).getRGB() : Color.lightGray.getRGB());
-            mc.fontRendererObj.drawStringWithShadow(",", 40 + 102 + 4 + mc.fontRendererObj.getStringWidth(this.modeSetting.getName() + ": " + mode) + count, 62 + 4 + 4 * (mc.fontRendererObj.FONT_HEIGHT + 2) + this.getOffset() * (mc.fontRendererObj.FONT_HEIGHT + 4), Color.lightGray.getRGB());
-            count += mc.fontRendererObj.getStringWidth(mode) + 6;
+        for (int i = 0; i < this.modeSetting.getModes().size(); i++) {
+            String modeName = this.modeSetting.getModes().get(i);
+            mc.fontRendererObj.drawStringWithShadow(modeName, 40 + 102 + 4 + mc.fontRendererObj.getStringWidth(this.modeSetting.getName() + ": ") + count, 62 + 4 + 4 * (mc.fontRendererObj.FONT_HEIGHT + 2) + this.getOffset() * (mc.fontRendererObj.FONT_HEIGHT + 4), Objects.equals(modeName, this.modeSetting.getCurrentMode()) ? new Color(100, 150, 200).getRGB() : Color.lightGray.getRGB());
+            if (i < this.modeSetting.getModes().size() - 1) {
+                mc.fontRendererObj.drawStringWithShadow(",", 40 + 102 + 4 + mc.fontRendererObj.getStringWidth(this.modeSetting.getName() + ": " + modeName) + count, 62 + 4 + 4 * (mc.fontRendererObj.FONT_HEIGHT + 2) + this.getOffset() * (mc.fontRendererObj.FONT_HEIGHT + 4), Color.lightGray.getRGB());
+            }
+            count += mc.fontRendererObj.getStringWidth(modeName) + 6;
         }
     }
 

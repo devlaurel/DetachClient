@@ -8,7 +8,7 @@ import java.util.Random;
 public class RandomUtil {
     private final Random random = new Random();
 
-    public float randomFloat(float min, float max) {
-        return min + (max - min) * random.nextFloat();
+    public double randomDouble(double min, double max) {
+        return min + (max - min) * random.nextDouble();
     }
 }

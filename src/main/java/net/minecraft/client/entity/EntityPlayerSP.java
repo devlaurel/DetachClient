@@ -1,10 +1,7 @@
 package net.minecraft.client.entity;
 
 import dev.laurel.client.Client;
-import dev.laurel.event.EventLook;
-import dev.laurel.event.EventMotion;
-import dev.laurel.event.EventSlowdown;
-import dev.laurel.event.EventUpdate;
+import dev.laurel.event.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.MovingSoundMinecartRiding;
 import net.minecraft.client.audio.PositionedSoundRecord;
@@ -190,6 +187,7 @@ public class EntityPlayerSP extends AbstractClientPlayer
     public void onUpdateWalkingPlayer()
     {
         EventMotion eventMotion = new EventMotion(this.posX, this.getEntityBoundingBox().minY, this.posZ, this.rotationYaw, this.rotationPitch, this.onGround);
+        eventMotion.setEventPhase(EventPhase.PRE);
         Client.INSTANCE.getEventBus().publish(eventMotion);
         boolean flag = this.isSprinting();
 
@@ -274,6 +272,8 @@ public class EntityPlayerSP extends AbstractClientPlayer
                 this.lastReportedPitch = eventMotion.getPitch();
             }
         }
+        eventMotion.setEventPhase(EventPhase.POST);
+        Client.INSTANCE.getEventBus().publish(eventMotion);
     }
 
     /**
