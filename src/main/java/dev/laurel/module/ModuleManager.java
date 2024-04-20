@@ -1,6 +1,6 @@
 package dev.laurel.module;
 
-import dev.laurel.module.impl.combat.AutoClicker;
+import dev.laurel.module.impl.combat.AutoClickerModule;
 import dev.laurel.module.impl.combat.KillAuraModule;
 import dev.laurel.module.impl.combat.NoClickDelayModule;
 import dev.laurel.module.impl.combat.VelocityModule;
@@ -25,7 +25,7 @@ public final class ModuleManager {
 
     public ModuleManager() {
         this.modules = new HashMap<>();
-        this.addModule(AutoClicker.class);
+        this.addModule(AutoClickerModule.class);
         this.addModule(BrightnessModule.class);
         this.addModule(ChestStealerModule.class);
         this.addModule(ESPModule.class);
@@ -38,11 +38,12 @@ public final class ModuleManager {
         this.addModule(NoClickDelayModule.class);
         this.addModule(NoHurtCamModule.class);
         this.addModule(NoJumpDelayModule.class);
-        this.addModule(NoSlowDown.class);
+        this.addModule(NoSlowDownModule.class);
         this.addModule(VelocityModule.class);
         this.addModule(ScoreboardModule.class);
         this.addModule(SprintModule.class);
         this.addModule(TimerModule.class);
+        this.addModule(ClickGUI.class);
     }
 
     public List<Module> getModulesInCategory(ModuleCategory moduleCategory) {

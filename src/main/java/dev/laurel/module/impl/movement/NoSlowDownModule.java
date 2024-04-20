@@ -8,9 +8,9 @@ import dev.laurel.module.ModuleCategory;
 import dev.laurel.module.ModuleInfo;
 
 @ModuleInfo(name = "NoSlowDown", description = "Prevents you from slowing down",moduleCategory = ModuleCategory.MOVEMENT)
-public final class NoSlowDown extends Module {
+public final class NoSlowDownModule extends Module {
 
-    public NoSlowDown() {
+    public NoSlowDownModule() {
 
     }
 

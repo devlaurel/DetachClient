@@ -14,7 +14,7 @@ import static dev.laurel.client.IMinecraft.mc;
 @ModuleInfo(name = "Flight", description = "Allows you to fly", moduleCategory = ModuleCategory.MOVEMENT)
 public final class FlightModule extends Module {
 
-    private final NumberSetting flightSpeed = new NumberSetting("Speed", 1, 0.1, 10, 0.1);
+    private final NumberSetting flightSpeed = new NumberSetting("FlightSpeed", 1, 0.1, 10, 0.1);
 
     public FlightModule() {
         this.addSettings(this.flightSpeed);

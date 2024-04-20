@@ -13,13 +13,13 @@ import dev.laurel.util.TimeHelper;
 import static dev.laurel.client.IMinecraft.mc;
 
 @ModuleInfo(name = "AutoClicker", description = "Automatically clicks your mouse", moduleCategory = ModuleCategory.COMBAT)
-public final class AutoClicker extends Module {
+public final class AutoClickerModule extends Module {
 
     private final TimeHelper timeHelper = new TimeHelper();
 
     private final NumberSetting cps = new NumberSetting("CPS", 8, 1, 20, 0.5);
 
-    public AutoClicker() {
+    public AutoClickerModule() {
         this.addSettings(this.cps);
     }
 
