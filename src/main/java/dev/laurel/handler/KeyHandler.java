@@ -17,9 +17,5 @@ public final class KeyHandler {
         for (Module module : Client.INSTANCE.getModuleManager().getModules().values()) {
             if (key == module.getKey()) module.toggle();
         }
-
-        if (key == Keyboard.KEY_RSHIFT) {
-            mc.displayGuiScreen(PanelClickGUI.INSTANCE);
-        }
     };
 }

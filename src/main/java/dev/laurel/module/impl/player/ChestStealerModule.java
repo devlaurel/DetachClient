@@ -45,11 +45,11 @@ public final class ChestStealerModule extends Module {
 
             if (this.checkTitle.isEnabled() && !chest.getLowerChestInventory().getDisplayName().getUnformattedText().equals("Chest")) return;
 
-            if (timeHelper.hasPassed((long) this.stealDelay.getValue())) {
+            if (this.timeHelper.hasPassed((long) this.stealDelay.getValue())) {
                 int slot = this.randomizeSlots.isEnabled() ? this.random.nextInt(chest.getLowerChestInventory().getSizeInventory()) : i;
                 mc.playerController.windowClick(chest.windowId, slot, 0, 1, mc.thePlayer);
                 if (this.autoClose.isEnabled() && this.isChestEmpty(chest)) mc.thePlayer.closeScreen();
-                timeHelper.reset();
+                this.timeHelper.reset();
             }
         }
     };

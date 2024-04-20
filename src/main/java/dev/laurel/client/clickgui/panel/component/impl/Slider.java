@@ -1,12 +1,10 @@
 package dev.laurel.client.clickgui.panel.component.impl;
 
-import dev.laurel.client.clickgui.panel.PanelClickGUI;
 import dev.laurel.client.clickgui.panel.component.Component;
 import dev.laurel.client.setting.Setting;
 import dev.laurel.client.setting.impl.NumberSetting;
 import dev.laurel.module.Module;
 import dev.laurel.util.DrawUtil;
-import net.minecraft.client.renderer.GlStateManager;
 
 import java.awt.*;
 import java.math.BigDecimal;
@@ -54,7 +52,6 @@ public final class Slider extends Component {
         if (mouseButton == 0) {
             if (this.isRectHovered(mouseX, mouseY, 40 + 102 + 4 + mc.fontRendererObj.getStringWidth(this.numberSetting.getName() + ": ") + 1, 62 + 3 + 4 * (mc.fontRendererObj.FONT_HEIGHT + 2) + this.getOffset() * (mc.fontRendererObj.FONT_HEIGHT + 4), 119, mc.fontRendererObj.FONT_HEIGHT)) {
                 this.sliding = true;
-                System.out.println("Sliding!");
             }
         }
     }

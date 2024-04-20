@@ -24,13 +24,13 @@ public final class ModeSetting extends Setting {
 
     private void cycleForwards() {
         modeIndex++;
-        if (modeIndex > modes.size() - 1) modeIndex = 0;
-        currentMode = modes.get(modeIndex);
+        if (modeIndex > this.modes.size() - 1) modeIndex = 0;
+        currentMode = this.modes.get(modeIndex);
     }
 
     private void cycleBackwards() {
         modeIndex--;
-        if (modeIndex < 0) modeIndex = modes.size() - 1;
-        currentMode = modes.get(modeIndex);
+        if (modeIndex < 0) modeIndex = this.modes.size() - 1;
+        currentMode = this.modes.get(modeIndex);
     }
 }

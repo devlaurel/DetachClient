@@ -1,11 +1,9 @@
 package dev.laurel.client.clickgui.panel.component.impl;
 
-import dev.laurel.client.clickgui.panel.PanelClickGUI;
 import dev.laurel.client.clickgui.panel.component.Component;
 import dev.laurel.client.setting.Setting;
 import dev.laurel.client.setting.impl.ModeSetting;
 import dev.laurel.module.Module;
-import net.minecraft.client.renderer.GlStateManager;
 
 import java.awt.*;
 import java.util.Objects;

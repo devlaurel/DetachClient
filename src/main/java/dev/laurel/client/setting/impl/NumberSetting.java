@@ -19,6 +19,6 @@ public final class NumberSetting extends Setting {
     }
 
     private double clamp(double value) {
-        return Math.min(max, Math.max(min, value));
+        return Math.min(this.max, Math.max(this.min, value));
     }
 }

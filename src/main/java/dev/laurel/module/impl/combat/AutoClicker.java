@@ -31,9 +31,9 @@ public final class AutoClicker extends Module {
         if (!mc.gameSettings.keyBindAttack.isKeyDown()) return;
 
         mc.setLeftClickCounter(0);
-        if (timeHelper.hasPassed((long) (1000 / this.cps.getValue()))) {
+        if (this.timeHelper.hasPassed((long) (1000 / this.cps.getValue()))) {
             mc.clickMouse();
-            timeHelper.reset();
+            this.timeHelper.reset();
         }
     };
 }
