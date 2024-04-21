@@ -1,4 +1,4 @@
-package dev.laurel.util;
+package dev.laurel.util.time;
 
 public final class TimeHelper {
     private static long lastTime = 0;

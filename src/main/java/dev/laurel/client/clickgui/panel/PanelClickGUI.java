@@ -12,7 +12,7 @@ import dev.laurel.client.setting.impl.NumberSetting;
 import dev.laurel.module.Module;
 import dev.laurel.module.ModuleCategory;
 import dev.laurel.module.impl.combat.KillAuraModule;
-import dev.laurel.util.DrawUtil;
+import dev.laurel.util.render.DrawUtil;
 import lombok.Getter;
 import net.minecraft.client.gui.GuiScreen;
 import org.lwjgl.input.Keyboard;
@@ -62,7 +62,7 @@ public final class PanelClickGUI extends GuiScreen {
         DrawUtil.drawFilledRect(40, 28, 400, 12, new Color(32, 32, 32));
         mc.fontRendererObj.drawStringWithShadow("ClickGUI", 42, 30, Color.lightGray.getRGB());
         // Panel
-        DrawUtil.drawFilledRect(40, 40, 400, 280, new Color(0, 0, 0, 160));
+        DrawUtil.drawFilledRect(40, 40, 400, 280, new Color(0, 0, 0, 140));
         // Vertical line
         DrawUtil.drawFilledRect(40 + 100, 40, 2, 280, new Color(32, 32, 32));
         // Horizontal line

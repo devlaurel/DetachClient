@@ -247,7 +247,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
     public EntityRenderer entityRenderer;
 
     /** Mouse left click counter */
-    @Setter private int leftClickCounter;
+    public int leftClickCounter;
 
     /** Display width */
     private int tempDisplayWidth;

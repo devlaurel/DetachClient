@@ -2,9 +2,11 @@ package dev.laurel.module.impl.movement;
 
 import dev.codeman.eventbus.EventHandler;
 import dev.codeman.eventbus.Listener;
+import dev.laurel.client.setting.impl.ModeSetting;
 import dev.laurel.event.EventJump;
 import dev.laurel.event.EventMoveFlying;
 import dev.laurel.event.EventMoveInput;
+import dev.laurel.event.EventRender2D;
 import dev.laurel.handler.RotationHandler;
 import dev.laurel.module.Module;
 import dev.laurel.module.ModuleCategory;
@@ -15,6 +17,15 @@ import static dev.laurel.client.IMinecraft.mc;
 
 @ModuleInfo(name = "MovementFix", description = "Makes your movement legit", moduleCategory = ModuleCategory.MOVEMENT)
 public final class MovementFixModule extends Module {
+
+    private final ModeSetting mode = new ModeSetting("Mode", "Silent", "Normal");
+
+    public MovementFixModule() {
+        this.addSettings(this.mode);
+    }
+
+    @EventHandler
+    private final Listener<EventRender2D> eventRender2DListener = event -> this.setSuffix(String.valueOf(this.mode.getCurrentMode()));
 
     @EventHandler
     private final Listener<EventMoveFlying> eventMoveFlyingListener = event -> event.setYaw(RotationHandler.INSTANCE.getServersideYaw());

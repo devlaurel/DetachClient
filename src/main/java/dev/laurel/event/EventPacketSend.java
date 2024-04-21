@@ -7,6 +7,6 @@ import net.minecraft.network.Packet;
 
 @Getter
 @AllArgsConstructor
-public class EventPacketSend extends Event {
+public final class EventPacketSend extends Event {
     private final Packet<?> packet;
 }

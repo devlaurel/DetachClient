@@ -22,4 +22,10 @@ public final class SprintModule extends Module {
     private final Listener<EventUpdate> eventUpdateListener = event -> {
         mc.gameSettings.keyBindSprint.setPressed(true);
     };
+
+    @Override
+    protected void onDisable() {
+        super.onDisable();
+        mc.gameSettings.keyBindSprint.unpressKey();
+    }
 }

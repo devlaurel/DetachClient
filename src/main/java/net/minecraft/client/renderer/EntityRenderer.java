@@ -670,9 +670,10 @@ public class EntityRenderer implements IResourceManagerReloadListener
         }
     }
 
+    private final NoHurtCamModule noHurtCam = (NoHurtCamModule) Client.INSTANCE.getModuleManager().getModule(NoHurtCamModule.class);
     private void hurtCameraEffect(float partialTicks)
     {
-        if (Client.INSTANCE.getModuleManager().getModule(NoHurtCamModule.class).isEnabled()) return;
+        if (this.noHurtCam.isEnabled()) return;
         if (this.mc.getRenderViewEntity() instanceof EntityLivingBase)
         {
             EntityLivingBase entitylivingbase = (EntityLivingBase)this.mc.getRenderViewEntity();

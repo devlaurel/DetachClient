@@ -12,7 +12,7 @@ import lombok.Getter;
 public final class AnimationsModule extends Module {
 
     private final BooleanSetting noTranslate = new BooleanSetting("NoTranslate", true);
-    private final NumberSetting itemScale = new NumberSetting("ItemScale", 0.2, 0.1, 1, 0.1);
+    private final NumberSetting itemScale = new NumberSetting("ItemScale", 0.75, 0.5, 2, 0.05);
 
     public AnimationsModule() {
         this.addSettings(this.noTranslate, this.itemScale);

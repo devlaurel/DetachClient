@@ -23,8 +23,4 @@ public final class NumberSetting extends Setting {
         this.max = max;
         this.increment = increment;
     }
-
-    private double clamp(double value) {
-        return Math.min(this.max, Math.max(this.min, value));
-    }
 }

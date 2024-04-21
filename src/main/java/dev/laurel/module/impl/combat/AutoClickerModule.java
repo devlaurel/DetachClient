@@ -8,7 +8,7 @@ import dev.laurel.event.EventUpdate;
 import dev.laurel.module.Module;
 import dev.laurel.module.ModuleCategory;
 import dev.laurel.module.ModuleInfo;
-import dev.laurel.util.TimeHelper;
+import dev.laurel.util.time.TimeHelper;
 
 import static dev.laurel.client.IMinecraft.mc;
 
@@ -30,7 +30,7 @@ public final class AutoClickerModule extends Module {
     private final Listener<EventUpdate> eventUpdateListener = event -> {
         if (!mc.gameSettings.keyBindAttack.isKeyDown()) return;
 
-        mc.setLeftClickCounter(0);
+        mc.leftClickCounter = 0;
         if (this.timeHelper.hasPassed((long) (1000 / this.cps.getValue()))) {
             mc.clickMouse();
             this.timeHelper.reset();

@@ -13,5 +13,5 @@ import static dev.laurel.client.IMinecraft.mc;
 public final class NoClickDelayModule extends Module {
 
     @EventHandler
-    private final Listener<EventUpdate> eventUpdateListener = event -> mc.setLeftClickCounter(0);
+    private final Listener<EventUpdate> eventUpdateListener = event ->  mc.leftClickCounter = 0;
 }

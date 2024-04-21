@@ -2,6 +2,7 @@ package dev.laurel.module;
 
 import dev.laurel.client.Client;
 import dev.laurel.client.setting.Setting;
+import dev.laurel.client.setting.impl.BooleanSetting;
 import lombok.Getter;
 import lombok.Setter;
 

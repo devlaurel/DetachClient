@@ -10,11 +10,11 @@ import org.lwjgl.input.Keyboard;
 import static dev.laurel.client.IMinecraft.mc;
 
 @ModuleInfo(name = "ClickGUI", description = "Displays a ClickGUI", moduleCategory = ModuleCategory.VISUAL)
-public final class ClickGUI extends Module {
+public final class ClickGUIModule extends Module {
 
     private final ModeSetting clickGui = new ModeSetting("Mode", "Augustus");
 
-    public ClickGUI() {
+    public ClickGUIModule() {
         this.setKey(Keyboard.KEY_RSHIFT);
     }
 

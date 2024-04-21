@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Getter
-public class ThemeManager {
+public final class ThemeManager {
     public static final ThemeManager INSTANCE = new ThemeManager();
 
     private final Map<String, Color[]> colorThemes = new HashMap<>();

@@ -9,7 +9,7 @@ import dev.laurel.event.EventUpdate;
 import dev.laurel.module.Module;
 import dev.laurel.module.ModuleCategory;
 import dev.laurel.module.ModuleInfo;
-import dev.laurel.util.TimeHelper;
+import dev.laurel.util.time.TimeHelper;
 import net.minecraft.client.gui.inventory.GuiChest;
 import net.minecraft.inventory.ContainerChest;
 
@@ -19,7 +19,7 @@ import java.util.Random;
 
 import static dev.laurel.client.IMinecraft.mc;
 
-@ModuleInfo(name = "ChestStealer", description = "Automatically steals items from chests", moduleCategory =  ModuleCategory.PLAYER)
+@ModuleInfo(name = "ChestStealer", description = "Automatically steals items from chests", moduleCategory = ModuleCategory.PLAYER)
 public final class ChestStealerModule extends Module {
 
     private final TimeHelper timeHelper = new TimeHelper();
@@ -53,11 +53,12 @@ public final class ChestStealerModule extends Module {
         if (this.checkTitle.isEnabled() && !chest.getLowerChestInventory().getDisplayName().getUnformattedText().equals("Chest")) return;
 
         if (this.timeHelper.hasPassed((long) this.stealDelay.getValue())) {
+            if (filledSlots.isEmpty()) return;
             int slot;
             if (this.randomizeSlots.isEnabled()) {
                 slot = filledSlots.get(this.random.nextInt(filledSlots.size()));
             } else {
-                slot = filledSlots.isEmpty() ? 0 : filledSlots.get(0);
+                slot = filledSlots.get(0);
             }
             mc.playerController.windowClick(chest.windowId, slot, 0, 1, mc.thePlayer);
             if (this.autoClose.isEnabled() && this.isChestEmpty(chest)) mc.thePlayer.closeScreen();

@@ -1,4 +1,4 @@
-package dev.laurel.util;
+package dev.laurel.util.render;
 
 import lombok.experimental.UtilityClass;
 import net.minecraft.client.gui.Gui;

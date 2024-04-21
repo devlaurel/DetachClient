@@ -25,12 +25,12 @@ public final class TimerModule extends Module {
 
     @EventHandler
     private final Listener<EventUpdate> eventUpdateListener = event -> {
-        mc.getTimer().setTimerSpeed((float) this.timerSpeed.getValue());
+        mc.getTimer().timerSpeed = ((float) this.timerSpeed.getValue());
     };
 
     @Override
     protected void onDisable() {
         super.onDisable();
-        mc.getTimer().setTimerSpeed(1F);
+        mc.getTimer().timerSpeed = 1.0F;
     }
 }

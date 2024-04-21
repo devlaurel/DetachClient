@@ -1,11 +1,10 @@
 package dev.laurel.module;
 
 import dev.laurel.module.impl.combat.*;
+import dev.laurel.module.impl.fun.SpinBotModule;
 import dev.laurel.module.impl.misc.TimerModule;
 import dev.laurel.module.impl.movement.*;
-import dev.laurel.module.impl.player.ChestStealerModule;
-import dev.laurel.module.impl.player.FastPlaceModule;
-import dev.laurel.module.impl.player.InventoryMoveModule;
+import dev.laurel.module.impl.player.*;
 import dev.laurel.module.impl.visual.*;
 import lombok.Getter;
 import lombok.SneakyThrows;
@@ -22,10 +21,13 @@ public final class ModuleManager {
 
     public ModuleManager() {
         this.modules = new HashMap<>();
-        this.addModule(AutoClickerModule.class);
-        this.addModule(BrightnessModule.class);
+        this.addModule(AimAssist.class);
         this.addModule(AnimationsModule.class);
+        this.addModule(AutoClickerModule.class);
+        this.addModule(AutoWalkModule.class);
+        this.addModule(BrightnessModule.class);
         this.addModule(ChestStealerModule.class);
+        this.addModule(ClickGUIModule.class);
         this.addModule(ESPModule.class);
         this.addModule(FastPlaceModule.class);
         this.addModule(FlightModule.class);
@@ -34,15 +36,18 @@ public final class ModuleManager {
         this.addModule(KillAuraModule.class);
         this.addModule(MovementFixModule.class);
         this.addModule(NoClickDelayModule.class);
+        this.addModule(NoFallModule.class);
+        this.addModule(NoFireModule.class);
         this.addModule(NoHurtCamModule.class);
         this.addModule(NoJumpDelayModule.class);
+        this.addModule(NoRotateSetModule.class);
         this.addModule(NoSlowDownModule.class);
         this.addModule(VelocityModule.class);
         this.addModule(ScoreboardModule.class);
+        this.addModule(SpinBotModule.class);
         this.addModule(SprintModule.class);
         this.addModule(StepModule.class);
         this.addModule(TimerModule.class);
-        this.addModule(ClickGUI.class);
     }
 
     public List<Module> getModulesInCategory(ModuleCategory moduleCategory) {

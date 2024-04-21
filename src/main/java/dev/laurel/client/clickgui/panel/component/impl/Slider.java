@@ -4,7 +4,7 @@ import dev.laurel.client.clickgui.panel.component.Component;
 import dev.laurel.client.setting.Setting;
 import dev.laurel.client.setting.impl.NumberSetting;
 import dev.laurel.module.Module;
-import dev.laurel.util.DrawUtil;
+import dev.laurel.util.render.DrawUtil;
 
 import java.awt.*;
 import java.math.BigDecimal;

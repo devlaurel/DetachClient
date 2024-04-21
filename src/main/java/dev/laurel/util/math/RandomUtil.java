@@ -1,4 +1,4 @@
-package dev.laurel.util;
+package dev.laurel.util.math;
 
 import lombok.experimental.UtilityClass;
 
